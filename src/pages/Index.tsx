@@ -1,13 +1,14 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Smartphone, Monitor } from 'lucide-react';
 import MobileApp from '@/components/mobile/MobileApp';
-import AdminDashboard from '@/components/admin/AdminDashboard';
 import heroImage from '@/assets/hero-image.jpg';
 
 const Index = () => {
-  const [activeView, setActiveView] = useState<'hero' | 'mobile' | 'admin'>('hero');
+  const [activeView, setActiveView] = useState<'hero' | 'mobile'>('hero');
+  const navigate = useNavigate();
 
   if (activeView === 'mobile') {
     return (
@@ -24,10 +25,6 @@ const Index = () => {
         </div>
       </div>
     );
-  }
-
-  if (activeView === 'admin') {
-    return <AdminDashboard />;
   }
 
   return (
@@ -69,7 +66,7 @@ const Index = () => {
             
             <Button
               size="lg"
-              onClick={() => setActiveView('admin')}
+              onClick={() => navigate('/admin')}
               variant="outline"
               className="border-white/30 text-white hover:bg-white/10 px-8 py-4 text-lg font-semibold hover:scale-105 transition-bounce backdrop-blur-sm"
             >
