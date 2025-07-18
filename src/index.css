@@ -2,39 +2,68 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Social Media Platform Design System - Neon Theme */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Core Background Colors */
+    --background: 220 20% 8%;
+    --foreground: 0 0% 98%;
+    --surface: 220 15% 12%;
+    --surface-hover: 220 15% 16%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    /* Card Components */
+    --card: 220 15% 10%;
+    --card-foreground: 0 0% 95%;
+    --card-hover: 220 15% 14%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    /* Popover & Modals */
+    --popover: 220 20% 8%;
+    --popover-foreground: 0 0% 98%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Neon Brand Colors */
+    --primary: 315 100% 65%;  /* Neon Pink */
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 315 100% 75%;
+    
+    --secondary: 250 100% 70%; /* Neon Blue */
+    --secondary-foreground: 0 0% 100%;
+    --secondary-glow: 250 100% 80%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --accent: 280 100% 68%; /* Neon Purple */
+    --accent-foreground: 0 0% 100%;
+    --accent-glow: 280 100% 78%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Status Colors */
+    --success: 120 60% 55%;
+    --warning: 35 95% 60%;
+    --destructive: 0 85% 60%;
+    --destructive-foreground: 0 0% 100%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Neutral Colors */
+    --muted: 220 15% 20%;
+    --muted-foreground: 220 10% 70%;
+    --border: 220 15% 20%;
+    --input: 220 15% 15%;
+    --ring: 315 100% 65%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--secondary)));
+    --gradient-secondary: linear-gradient(135deg, hsl(var(--secondary)), hsl(var(--accent)));
+    --gradient-accent: linear-gradient(135deg, hsl(var(--accent)), hsl(var(--primary)));
+    --gradient-surface: linear-gradient(135deg, hsl(var(--surface)), hsl(var(--card)));
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    /* Shadows & Glows */
+    --shadow-glow: 0 0 30px hsl(var(--primary) / 0.3);
+    --shadow-secondary-glow: 0 0 30px hsl(var(--secondary) / 0.3);
+    --shadow-accent-glow: 0 0 30px hsl(var(--accent) / 0.3);
+    --shadow-elegant: 0 10px 40px -10px hsl(220 20% 5% / 0.8);
+
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 
     --radius: 0.5rem;
 
@@ -100,6 +129,146 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-inter;
+  }
+
+  /* Custom Utility Classes */
+  .gradient-primary {
+    background: var(--gradient-primary);
+  }
+  
+  .gradient-secondary {
+    background: var(--gradient-secondary);
+  }
+  
+  .gradient-accent {
+    background: var(--gradient-accent);
+  }
+  
+  .shadow-glow {
+    box-shadow: var(--shadow-glow);
+  }
+  
+  .shadow-secondary-glow {
+    box-shadow: var(--shadow-secondary-glow);
+  }
+  
+  .shadow-accent-glow {
+    box-shadow: var(--shadow-accent-glow);
+  }
+  
+  .transition-smooth {
+    transition: var(--transition-smooth);
+  }
+  
+  .transition-bounce {
+    transition: var(--transition-bounce);
+  }
+
+  /* Neon Glow Effects */
+  .glow-pink {
+    box-shadow: 0 0 20px hsl(var(--primary) / 0.5), 0 0 40px hsl(var(--primary) / 0.3);
+  }
+  
+  .glow-blue {
+    box-shadow: 0 0 20px hsl(var(--secondary) / 0.5), 0 0 40px hsl(var(--secondary) / 0.3);
+  }
+  
+  .glow-purple {
+    box-shadow: 0 0 20px hsl(var(--accent) / 0.5), 0 0 40px hsl(var(--accent) / 0.3);
+  }
+
+  /* Video Feed Specific */
+  .video-overlay-gradient {
+    background: linear-gradient(transparent 50%, hsl(220 20% 5% / 0.8));
+  }
+}
+
+@layer components {
+  /* Floating Action Button */
+  .fab {
+    @apply fixed bottom-6 right-6 w-14 h-14 rounded-full shadow-glow transition-smooth;
+    @apply flex items-center justify-center gradient-primary;
+  }
+  
+  .fab:hover {
+    @apply scale-110;
+  }
+
+  /* Bottom Navigation */
+  .bottom-nav {
+    @apply fixed bottom-0 left-0 right-0 h-20 bg-surface/90 backdrop-blur-lg border-t border-border;
+    @apply flex items-center justify-around px-4;
+  }
+  
+  .nav-item {
+    @apply flex flex-col items-center justify-center p-2 rounded-xl transition-smooth;
+    @apply hover:bg-surface-hover;
+  }
+  
+  .nav-item.active {
+    @apply text-primary;
+  }
+
+  /* Video Card */
+  .video-card {
+    @apply relative w-full h-screen bg-black overflow-hidden;
+  }
+  
+  .video-actions {
+    @apply absolute right-4 bottom-32 flex flex-col gap-4 z-10;
+  }
+  
+  .action-btn {
+    @apply w-12 h-12 rounded-full bg-surface/80 backdrop-blur-lg;
+    @apply flex items-center justify-center transition-smooth;
+    @apply hover:scale-110 hover:bg-surface;
+  }
+
+  /* Profile Stats */
+  .stat-item {
+    @apply text-center;
+  }
+  
+  .stat-number {
+    @apply text-xl font-bold text-foreground;
+  }
+  
+  .stat-label {
+    @apply text-sm text-muted-foreground;
+  }
+}
+
+@layer utilities {
+  /* Animation Keyframes */
+  @keyframes pulse-glow {
+    0%, 100% { 
+      box-shadow: 0 0 20px hsl(var(--primary) / 0.5); 
+    }
+    50% { 
+      box-shadow: 0 0 30px hsl(var(--primary) / 0.8), 0 0 60px hsl(var(--primary) / 0.4); 
+    }
+  }
+  
+  @keyframes bounce-subtle {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-4px); }
+  }
+  
+  @keyframes slide-up {
+    from { transform: translateY(100%); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+  
+  .animate-pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+  
+  .animate-bounce-subtle {
+    animation: bounce-subtle 2s ease-in-out infinite;
+  }
+  
+  .animate-slide-up {
+    animation: slide-up 0.3s ease-out;
   }
 }
