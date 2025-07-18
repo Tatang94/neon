@@ -13,11 +13,11 @@ const Index = () => {
   if (activeView === 'mobile') {
     return (
       <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 flex items-center justify-center p-4">
-        <div className="text-center mb-8">
+        <div className="text-center">
           <Button 
             onClick={() => setActiveView('hero')}
             variant="outline"
-            className="mb-4 border-white/20 text-white hover:bg-white/10"
+            className="mb-6 border-white/20 text-white hover:bg-white/10"
           >
             ← Back to Home
           </Button>
@@ -30,7 +30,7 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       {/* Hero Section */}
-      <div className="relative h-screen flex items-center justify-center overflow-hidden">
+      <section className="relative h-screen flex items-center justify-center overflow-hidden">
         {/* Background Image with Overlay */}
         <div 
           className="absolute inset-0 bg-cover bg-center"
@@ -38,7 +38,7 @@ const Index = () => {
         />
         <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/70" />
         
-        {/* Content */}
+        {/* Hero Content */}
         <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-6">
           <h1 className="text-6xl md:text-8xl font-black mb-6 leading-tight">
             <span className="gradient-primary bg-clip-text text-transparent">VIRAL</span>
@@ -53,7 +53,7 @@ const Index = () => {
             Create, discover, and share amazing content with our Gen Z-focused mobile app and powerful admin dashboard
           </p>
 
-          {/* Action Buttons */}
+          {/* Call to Action Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button
               size="lg"
@@ -80,17 +80,17 @@ const Index = () => {
         <div className="absolute top-1/4 left-1/4 w-32 h-32 rounded-full bg-primary/20 blur-xl animate-pulse-glow" />
         <div className="absolute bottom-1/3 right-1/4 w-24 h-24 rounded-full bg-secondary/20 blur-xl animate-pulse-glow" style={{ animationDelay: '1s' }} />
         <div className="absolute top-1/2 right-1/6 w-16 h-16 rounded-full bg-accent/20 blur-xl animate-pulse-glow" style={{ animationDelay: '2s' }} />
-      </div>
+      </section>
 
-      {/* Features Preview */}
-      <div className="py-20 px-6">
+      {/* Features Section */}
+      <section className="py-20 px-6 bg-background">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-4xl font-bold text-center mb-16 gradient-primary bg-clip-text text-transparent">
             Platform Features
           </h2>
           
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            {/* Mobile Features */}
+          <div className="grid md:grid-cols-2 gap-12 items-start">
+            {/* Mobile Features Card */}
             <Card className="border-border bg-card/50 backdrop-blur-sm hover:border-primary/30 transition-smooth">
               <CardContent className="p-8">
                 <div className="flex items-center gap-3 mb-6">
@@ -99,30 +99,30 @@ const Index = () => {
                 </div>
                 <ul className="space-y-4 text-muted-foreground">
                   <li className="flex items-center gap-3">
-                    <div className="w-2 h-2 rounded-full bg-primary" />
-                    Vertical video feed with smooth swipe gestures
+                    <div className="w-2 h-2 rounded-full bg-primary flex-shrink-0" />
+                    <span>Vertical video feed with smooth swipe gestures</span>
                   </li>
                   <li className="flex items-center gap-3">
-                    <div className="w-2 h-2 rounded-full bg-secondary" />
-                    Advanced discovery with trending hashtags
+                    <div className="w-2 h-2 rounded-full bg-secondary flex-shrink-0" />
+                    <span>Advanced discovery with trending hashtags</span>
                   </li>
                   <li className="flex items-center gap-3">
-                    <div className="w-2 h-2 rounded-full bg-accent" />
-                    Creative tools with filters and music
+                    <div className="w-2 h-2 rounded-full bg-accent flex-shrink-0" />
+                    <span>Creative tools with filters and music</span>
                   </li>
                   <li className="flex items-center gap-3">
-                    <div className="w-2 h-2 rounded-full bg-primary" />
-                    Real-time notifications and messaging
+                    <div className="w-2 h-2 rounded-full bg-primary flex-shrink-0" />
+                    <span>Real-time notifications and messaging</span>
                   </li>
                   <li className="flex items-center gap-3">
-                    <div className="w-2 h-2 rounded-full bg-secondary" />
-                    Creator profiles with detailed analytics
+                    <div className="w-2 h-2 rounded-full bg-secondary flex-shrink-0" />
+                    <span>Creator profiles with detailed analytics</span>
                   </li>
                 </ul>
               </CardContent>
             </Card>
 
-            {/* Admin Features */}
+            {/* Admin Features Card */}
             <Card className="border-border bg-card/50 backdrop-blur-sm hover:border-secondary/30 transition-smooth">
               <CardContent className="p-8">
                 <div className="flex items-center gap-3 mb-6">
@@ -131,31 +131,31 @@ const Index = () => {
                 </div>
                 <ul className="space-y-4 text-muted-foreground">
                   <li className="flex items-center gap-3">
-                    <div className="w-2 h-2 rounded-full bg-secondary" />
-                    Comprehensive analytics and user insights
+                    <div className="w-2 h-2 rounded-full bg-secondary flex-shrink-0" />
+                    <span>Comprehensive analytics and user insights</span>
                   </li>
                   <li className="flex items-center gap-3">
-                    <div className="w-2 h-2 rounded-full bg-accent" />
-                    Advanced content moderation tools
+                    <div className="w-2 h-2 rounded-full bg-accent flex-shrink-0" />
+                    <span>Advanced content moderation tools</span>
                   </li>
                   <li className="flex items-center gap-3">
-                    <div className="w-2 h-2 rounded-full bg-primary" />
-                    User management and role permissions
+                    <div className="w-2 h-2 rounded-full bg-primary flex-shrink-0" />
+                    <span>User management and role permissions</span>
                   </li>
                   <li className="flex items-center gap-3">
-                    <div className="w-2 h-2 rounded-full bg-secondary" />
-                    Music library and content management
+                    <div className="w-2 h-2 rounded-full bg-secondary flex-shrink-0" />
+                    <span>Music library and content management</span>
                   </li>
                   <li className="flex items-center gap-3">
-                    <div className="w-2 h-2 rounded-full bg-accent" />
-                    Monetization and creator payout system
+                    <div className="w-2 h-2 rounded-full bg-accent flex-shrink-0" />
+                    <span>Monetization and creator payout system</span>
                   </li>
                 </ul>
               </CardContent>
             </Card>
           </div>
         </div>
-      </div>
+      </section>
     </div>
   );
 };
