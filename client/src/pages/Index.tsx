@@ -10,12 +10,12 @@ const Index = () => {
 
   if (activeView === 'mobile') {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 flex items-center justify-center p-4">
-        <div className="text-center">
+      <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 flex items-center justify-center p-6">
+        <div className="text-center w-full max-w-lg">
           <Button 
             onClick={() => setActiveView('hero')}
             variant="outline"
-            className="mb-6 border-white/20 text-white hover:bg-white/10"
+            className="mb-8 border-white/20 text-white hover:bg-white/10 px-6 py-2"
           >
             ← Back to Home
           </Button>

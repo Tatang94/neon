@@ -20,9 +20,12 @@ A modern short video social platform with neon-themed design, featuring a mobile
 - **2025-01-19**: Successfully migrated from Lovable to Replit
   - Fixed routing system to use wouter instead of react-router-dom
   - Resolved Tailwind CSS configuration issues
-  - Updated mobile app sizing to use fixed height (600px) instead of full screen
+  - Updated mobile app sizing from 600px to 700px for better visibility
   - Removed admin dashboard access from landing page per user request
   - Admin dashboard now only accessible via direct `/admin` URL
+  - Enhanced mobile video feed with larger touch targets and better UI scaling
+  - Added touch gesture support for video navigation
+  - Improved button sizes and spacing for better mobile experience
 
 ## User Preferences
 - Admin dashboard should be hidden from main landing page

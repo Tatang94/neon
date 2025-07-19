@@ -126,19 +126,19 @@ const VideoFeed = () => {
       <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
 
       {/* Video Actions (Right Side) */}
-      <div className="absolute right-3 bottom-28 flex flex-col items-center gap-4">
+      <div className="absolute right-4 bottom-32 flex flex-col items-center gap-6">
         {/* Profile Picture */}
         <div className="relative">
           <img 
             src={avatarPlaceholder} 
             alt="Profile"
-            className="w-12 h-12 rounded-full border-2 border-white"
+            className="w-14 h-14 rounded-full border-3 border-white"
           />
           {!video.isFollowing && (
             <Button
               size="sm"
               onClick={() => handleFollow(video.id)}
-              className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-6 h-6 rounded-full gradient-primary text-white text-xs font-bold hover:scale-110 transition-transform"
+              className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-7 h-7 rounded-full gradient-primary text-white text-sm font-bold hover:scale-110 transition-transform"
             >
               +
             </Button>
@@ -148,75 +148,75 @@ const VideoFeed = () => {
         {/* Like Button */}
         <div className="flex flex-col items-center">
           <button 
-            className="w-12 h-12 rounded-full bg-black/20 backdrop-blur-sm flex items-center justify-center hover:bg-black/40 transition-all"
+            className="w-14 h-14 rounded-full bg-black/30 backdrop-blur-sm flex items-center justify-center hover:bg-black/50 transition-all hover:scale-110"
             onClick={() => handleLike(video.id)}
           >
             <Heart 
-              className={`w-6 h-6 ${video.isLiked ? 'text-red-500 fill-red-500' : 'text-white'}`} 
+              className={`w-7 h-7 ${video.isLiked ? 'text-red-500 fill-red-500' : 'text-white'}`} 
             />
           </button>
-          <span className="text-white text-xs font-medium mt-1">
+          <span className="text-white text-sm font-medium mt-2">
             {formatNumber(video.likes)}
           </span>
         </div>
 
         {/* Comment Button */}
         <div className="flex flex-col items-center">
-          <button className="w-12 h-12 rounded-full bg-black/20 backdrop-blur-sm flex items-center justify-center hover:bg-black/40 transition-all">
-            <MessageCircle className="w-6 h-6 text-white" />
+          <button className="w-14 h-14 rounded-full bg-black/30 backdrop-blur-sm flex items-center justify-center hover:bg-black/50 transition-all hover:scale-110">
+            <MessageCircle className="w-7 h-7 text-white" />
           </button>
-          <span className="text-white text-xs font-medium mt-1">
+          <span className="text-white text-sm font-medium mt-2">
             {formatNumber(video.comments)}
           </span>
         </div>
 
         {/* Share Button */}
         <div className="flex flex-col items-center">
-          <button className="w-12 h-12 rounded-full bg-black/20 backdrop-blur-sm flex items-center justify-center hover:bg-black/40 transition-all">
-            <Share className="w-6 h-6 text-white" />
+          <button className="w-14 h-14 rounded-full bg-black/30 backdrop-blur-sm flex items-center justify-center hover:bg-black/50 transition-all hover:scale-110">
+            <Share className="w-7 h-7 text-white" />
           </button>
-          <span className="text-white text-xs font-medium mt-1">
+          <span className="text-white text-sm font-medium mt-2">
             {formatNumber(video.shares)}
           </span>
         </div>
 
         {/* Save Button */}
-        <button className="w-12 h-12 rounded-full bg-black/20 backdrop-blur-sm flex items-center justify-center hover:bg-black/40 transition-all">
-          <Bookmark className="w-6 h-6 text-white" />
+        <button className="w-14 h-14 rounded-full bg-black/30 backdrop-blur-sm flex items-center justify-center hover:bg-black/50 transition-all hover:scale-110">
+          <Bookmark className="w-7 h-7 text-white" />
         </button>
       </div>
 
       {/* Video Info (Bottom Left) */}
-      <div className="absolute bottom-20 left-4 right-20 z-10">
+      <div className="absolute bottom-24 left-4 right-20 z-10">
         <div className="text-white">
-          <h3 className="font-bold text-lg mb-2">{video.username}</h3>
-          <p className="text-sm mb-4 leading-relaxed">{video.caption}</p>
+          <h3 className="font-bold text-xl mb-3">{video.username}</h3>
+          <p className="text-base mb-4 leading-relaxed">{video.caption}</p>
           
           {/* Music Info */}
-          <div className="flex items-center gap-2 bg-black/30 backdrop-blur-sm rounded-full px-3 py-2 w-fit">
-            <Music className="w-4 h-4" />
-            <span className="text-xs truncate max-w-48">{video.music}</span>
+          <div className="flex items-center gap-2 bg-black/40 backdrop-blur-sm rounded-full px-4 py-2 w-fit">
+            <Music className="w-5 h-5" />
+            <span className="text-sm truncate max-w-56">{video.music}</span>
           </div>
         </div>
       </div>
 
       {/* Navigation Controls */}
-      <div className="absolute top-1/2 left-4 transform -translate-y-1/2 flex flex-col gap-2">
+      <div className="absolute top-1/2 left-4 transform -translate-y-1/2 flex flex-col gap-3">
         {videos.map((_, index) => (
           <button
             key={index}
             onClick={() => setCurrentVideo(index)}
-            className={`w-2 h-6 rounded-full transition-all ${
-              index === currentVideo ? 'bg-white' : 'bg-white/30'
+            className={`w-3 h-8 rounded-full transition-all hover:scale-110 ${
+              index === currentVideo ? 'bg-white shadow-lg' : 'bg-white/40 hover:bg-white/60'
             }`}
           />
         ))}
       </div>
 
       {/* Swipe to navigate hint */}
-      <div className="absolute top-4 left-1/2 transform -translate-x-1/2">
-        <div className="bg-black/20 backdrop-blur-sm rounded-full px-3 py-1">
-          <span className="text-white text-xs">Swipe ↑↓ untuk video lain</span>
+      <div className="absolute top-6 left-1/2 transform -translate-x-1/2">
+        <div className="bg-black/30 backdrop-blur-sm rounded-full px-4 py-2">
+          <span className="text-white text-sm">Swipe ↑↓ untuk video lain</span>
         </div>
       </div>
     </div>
