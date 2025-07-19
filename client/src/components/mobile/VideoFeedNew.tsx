@@ -1,84 +1,113 @@
 import { useState, useEffect } from 'react';
-import { Heart, MessageCircle, Share, Bookmark, MoreHorizontal, Music } from 'lucide-react';
+import { Heart, MessageCircle, Share, Bookmark, Music } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useQuery, useMutation } from '@tanstack/react-query';
 import { apiRequest, queryClient, CURRENT_USER_ID } from '@/lib/queryClient';
-import { Video } from '@/shared/schema';
+import { Video } from '../../../../shared/schema';
+import { useToast } from '@/hooks/use-toast';
 import videoPlaceholder from '@/assets/video-placeholder.jpg';
 import avatarPlaceholder from '@/assets/avatar-placeholder.jpg';
 
-interface VideoData {
-  id: string;
-  username: string;
-  caption: string;
-  likes: number;
-  comments: number;
-  shares: number;
-  isLiked: boolean;
-  isFollowing: boolean;
-  music: string;
-}
-
-const sampleVideos: VideoData[] = [
-  {
-    id: '1',
-    username: '@creativevibe',
-    caption: 'Creating magic with neon lights ✨ #neonvibes #creative #art',
-    likes: 12500,
-    comments: 342,
-    shares: 1200,
-    isLiked: false,
-    isFollowing: false,
-    music: 'Electric Dreams - Synthwave Mix'
-  },
-  {
-    id: '2',
-    username: '@dancequeen',
-    caption: 'New dance trend! Who else is trying this? 💃 #dance #trending',
-    likes: 8900,
-    comments: 156,
-    shares: 890,
-    isLiked: true,
-    isFollowing: true,
-    music: 'Beat Drop - DJ Neon'
-  },
-  {
-    id: '3',
-    username: '@techreviewer',
-    caption: 'Mind-blowing gadget review! Link in bio 🔥 #tech #gadgets',
-    likes: 15600,
-    comments: 892,
-    shares: 2100,
-    isLiked: false,
-    isFollowing: false,
-    music: 'Futuristic Beats - Electronic'
-  }
-];
-
-const VideoFeed = () => {
+const VideoFeedNew = () => {
   const [currentVideo, setCurrentVideo] = useState(0);
-  const [videos, setVideos] = useState(sampleVideos);
   const [touchStart, setTouchStart] = useState(0);
   const [touchEnd, setTouchEnd] = useState(0);
+  const { toast } = useToast();
 
-  const handleLike = (videoId: string) => {
-    setVideos(videos.map(video => 
-      video.id === videoId 
-        ? { 
-            ...video, 
-            isLiked: !video.isLiked,
-            likes: video.isLiked ? video.likes - 1 : video.likes + 1
-          }
-        : video
-    ));
+  // Fetch videos from API
+  const { data: videos = [], isLoading, error } = useQuery<Video[]>({
+    queryKey: ['/api/videos'],
+    queryFn: () => apiRequest<Video[]>('/api/videos'),
+  });
+
+  // Like video mutation
+  const likeMutation = useMutation({
+    mutationFn: async ({ videoId, isLiked }: { videoId: string; isLiked: boolean }) => {
+      const endpoint = isLiked ? `/api/videos/${videoId}/unlike` : `/api/videos/${videoId}/like`;
+      return apiRequest(endpoint, {
+        method: 'POST',
+        body: JSON.stringify({ userId: CURRENT_USER_ID }),
+      });
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['/api/videos'] });
+    },
+    onError: () => {
+      toast({
+        title: "Error",
+        description: "Failed to update like status",
+        variant: "destructive",
+      });
+    },
+  });
+
+  // Follow user mutation
+  const followMutation = useMutation({
+    mutationFn: async ({ userId, isFollowing }: { userId: string; isFollowing: boolean }) => {
+      const endpoint = isFollowing ? `/api/users/${userId}/unfollow` : `/api/users/${userId}/follow`;
+      return apiRequest(endpoint, {
+        method: 'POST',
+        body: JSON.stringify({ followerId: CURRENT_USER_ID }),
+      });
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['/api/videos'] });
+      toast({
+        title: "Success",
+        description: "Follow status updated",
+      });
+    },
+    onError: () => {
+      toast({
+        title: "Error",
+        description: "Failed to update follow status",
+        variant: "destructive",
+      });
+    },
+  });
+
+  // Share functionality
+  const shareMutation = useMutation({
+    mutationFn: async (videoId: string) => {
+      if (navigator.share) {
+        await navigator.share({
+          title: 'Check out this video!',
+          url: `${window.location.origin}/video/${videoId}`,
+        });
+      } else {
+        await navigator.clipboard.writeText(`${window.location.origin}/video/${videoId}`);
+        toast({
+          title: "Link copied!",
+          description: "Video link copied to clipboard",
+        });
+      }
+      return { success: true };
+    },
+  });
+
+  // Increment view count when video changes
+  useEffect(() => {
+    if (videos.length > 0) {
+      const video = videos[currentVideo];
+      if (video) {
+        apiRequest(`/api/videos/${video.id}/view`, { method: 'POST' })
+          .catch(() => {}); // Silent fail for view tracking
+      }
+    }
+  }, [currentVideo, videos]);
+
+  const handleLike = (videoId: string, isLiked: boolean) => {
+    likeMutation.mutate({ videoId, isLiked });
   };
 
-  const handleFollow = (videoId: string) => {
-    setVideos(videos.map(video => 
-      video.id === videoId 
-        ? { ...video, isFollowing: !video.isFollowing }
-        : video
-    ));
+  const handleFollow = (username: string, isFollowing: boolean) => {
+    // Find user ID from username (in real app, this would be handled differently)
+    const userId = username === '@creativevibe' ? '1' : username === '@dancequeen' ? '2' : '3';
+    followMutation.mutate({ userId, isFollowing });
+  };
+
+  const handleShare = (videoId: string) => {
+    shareMutation.mutate(videoId);
   };
 
   const formatNumber = (num: number) => {
@@ -110,6 +139,25 @@ const VideoFeed = () => {
     }
   };
 
+  if (isLoading) {
+    return (
+      <div className="h-full bg-black flex items-center justify-center">
+        <div className="text-white text-lg">Loading videos...</div>
+      </div>
+    );
+  }
+
+  if (error || videos.length === 0) {
+    return (
+      <div className="h-full bg-black flex items-center justify-center">
+        <div className="text-white text-center">
+          <p className="text-lg mb-2">No videos available</p>
+          <p className="text-sm text-white/60">Check your connection and try again</p>
+        </div>
+      </div>
+    );
+  }
+
   const video = videos[currentVideo];
 
   return (
@@ -140,7 +188,8 @@ const VideoFeed = () => {
           {!video.isFollowing && (
             <Button
               size="sm"
-              onClick={() => handleFollow(video.id)}
+              onClick={() => handleFollow(video.username, video.isFollowing)}
+              disabled={followMutation.isPending}
               className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-7 h-7 rounded-full gradient-primary text-white text-sm font-bold hover:scale-110 transition-transform"
             >
               +
@@ -152,7 +201,8 @@ const VideoFeed = () => {
         <div className="flex flex-col items-center">
           <button 
             className="w-14 h-14 rounded-full bg-black/30 backdrop-blur-sm flex items-center justify-center hover:bg-black/50 transition-all hover:scale-110"
-            onClick={() => handleLike(video.id)}
+            onClick={() => handleLike(video.id, video.isLiked)}
+            disabled={likeMutation.isPending}
           >
             <Heart 
               className={`w-7 h-7 ${video.isLiked ? 'text-red-500 fill-red-500' : 'text-white'}`} 
@@ -175,7 +225,11 @@ const VideoFeed = () => {
 
         {/* Share Button */}
         <div className="flex flex-col items-center">
-          <button className="w-14 h-14 rounded-full bg-black/30 backdrop-blur-sm flex items-center justify-center hover:bg-black/50 transition-all hover:scale-110">
+          <button 
+            className="w-14 h-14 rounded-full bg-black/30 backdrop-blur-sm flex items-center justify-center hover:bg-black/50 transition-all hover:scale-110"
+            onClick={() => handleShare(video.id)}
+            disabled={shareMutation.isPending}
+          >
             <Share className="w-7 h-7 text-white" />
           </button>
           <span className="text-white text-sm font-medium mt-2">
@@ -226,4 +280,4 @@ const VideoFeed = () => {
   );
 };
 
-export default VideoFeed;
+export default VideoFeedNew;

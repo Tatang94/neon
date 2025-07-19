@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { Home, Search, Plus, MessageCircle, User } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import VideoFeed from './VideoFeed';
-import DiscoverPage from './DiscoverPage';
-import CreatePage from './CreatePage';
-import InboxPage from './InboxPage';
-import ProfilePage from './ProfilePage';
+import VideoFeed from './VideoFeedNew';
+import DiscoverPage from './DiscoverPageNew';
+import CreatePage from './CreatePageNew';
+import InboxPage from './InboxPageNew';
+import ProfilePage from './ProfilePageNew';
 
 const MobileApp = () => {
   const [activeTab, setActiveTab] = useState('home');
