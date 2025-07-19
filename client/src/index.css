@@ -129,7 +129,8 @@
   }
 
   body {
-    @apply bg-background text-foreground font-inter;
+    @apply bg-background text-foreground;
+    font-family: 'Inter', sans-serif;
   }
 
   /* Custom Utility Classes */
@@ -197,13 +198,17 @@
 
   /* Bottom Navigation */
   .bottom-nav {
-    @apply fixed bottom-0 left-0 right-0 h-20 bg-surface/90 backdrop-blur-lg border-t border-border;
+    @apply fixed bottom-0 left-0 right-0 h-20 backdrop-blur-lg border-t border-border;
     @apply flex items-center justify-around px-4;
+    background-color: hsl(var(--surface) / 0.9);
   }
   
   .nav-item {
     @apply flex flex-col items-center justify-center p-2 rounded-xl transition-smooth;
-    @apply hover:bg-surface-hover;
+  }
+  
+  .nav-item:hover {
+    background-color: hsl(var(--surface-hover));
   }
   
   .nav-item.active {
@@ -220,9 +225,14 @@
   }
   
   .action-btn {
-    @apply w-12 h-12 rounded-full bg-surface/80 backdrop-blur-lg;
+    @apply w-12 h-12 rounded-full backdrop-blur-lg;
     @apply flex items-center justify-center transition-smooth;
-    @apply hover:scale-110 hover:bg-surface;
+    @apply hover:scale-110;
+    background-color: hsl(var(--surface) / 0.8);
+  }
+  
+  .action-btn:hover {
+    background-color: hsl(var(--surface));
   }
 
   /* Profile Stats */

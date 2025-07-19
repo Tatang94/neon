@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation } from 'wouter';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Smartphone, Monitor } from 'lucide-react';
@@ -8,7 +8,7 @@ import heroImage from '@/assets/hero-image.jpg';
 
 const Index = () => {
   const [activeView, setActiveView] = useState<'hero' | 'mobile'>('hero');
-  const navigate = useNavigate();
+  const [, setLocation] = useLocation();
 
   if (activeView === 'mobile') {
     return (
@@ -66,7 +66,7 @@ const Index = () => {
             
             <Button
               size="lg"
-              onClick={() => navigate('/admin')}
+              onClick={() => setLocation('/admin')}
               variant="outline"
               className="border-white/30 text-white hover:bg-white/10 px-8 py-4 text-lg font-semibold hover:scale-105 transition-bounce backdrop-blur-sm"
             >
