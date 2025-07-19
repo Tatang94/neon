@@ -5,8 +5,8 @@ import { useQuery, useMutation } from '@tanstack/react-query';
 import { apiRequest, queryClient, CURRENT_USER_ID } from '@/lib/queryClient';
 import { Video } from '../../../../shared/schema';
 import { useToast } from '@/hooks/use-toast';
-import videoPlaceholder from '@/assets/video-placeholder.jpg';
-import avatarPlaceholder from '@/assets/avatar-placeholder.jpg';
+import VideoThumbnail from '@/components/ui/VideoThumbnail';
+import AvatarPlaceholder from '@/components/ui/AvatarPlaceholder';
 
 const VideoFeedNew = () => {
   const [currentVideo, setCurrentVideo] = useState(0);
@@ -168,10 +168,7 @@ const VideoFeedNew = () => {
       onTouchEnd={handleTouchEnd}
     >
       {/* Video Background */}
-      <div 
-        className="absolute inset-0 bg-cover bg-center"
-        style={{ backgroundImage: `url(${videoPlaceholder})` }}
-      />
+      <VideoThumbnail className="absolute inset-0" showPlayButton={false} />
       
       {/* Video Overlay Gradient */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
@@ -180,10 +177,10 @@ const VideoFeedNew = () => {
       <div className="absolute right-4 bottom-40 flex flex-col items-center gap-6">
         {/* Profile Picture */}
         <div className="relative">
-          <img 
-            src={avatarPlaceholder} 
-            alt="Profile"
-            className="w-14 h-14 rounded-full border-3 border-white"
+          <AvatarPlaceholder 
+            username={video.username}
+            size="lg"
+            className="border-3 border-white"
           />
           {!video.isFollowing && (
             <Button

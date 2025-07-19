@@ -5,8 +5,8 @@ import { Button } from '@/components/ui/button';
 import { useQuery } from '@tanstack/react-query';
 import { apiRequest } from '@/lib/queryClient';
 import { Video, User } from '../../../../shared/schema';
-import videoPlaceholder from '@/assets/video-placeholder.jpg';
-import avatarPlaceholder from '@/assets/avatar-placeholder.jpg';
+import VideoThumbnail from '@/components/ui/VideoThumbnail';
+import AvatarPlaceholder from '@/components/ui/AvatarPlaceholder';
 
 const DiscoverPageNew = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -58,12 +58,8 @@ const DiscoverPageNew = () => {
       {/* Trending Videos Grid */}
       <div className="grid grid-cols-3 gap-2">
         {filteredVideos.slice(0, 9).map((video) => (
-          <div key={video.id} className="relative aspect-[9/16] bg-gray-800 rounded-lg overflow-hidden">
-            <img 
-              src={videoPlaceholder} 
-              alt="Video"
-              className="w-full h-full object-cover"
-            />
+          <div key={video.id} className="relative aspect-[9/16] rounded-lg overflow-hidden">
+            <VideoThumbnail className="w-full h-full" />
             <div className="absolute bottom-2 left-2 flex items-center gap-1">
               <Heart className="w-4 h-4 text-white" />
               <span className="text-white text-xs">{formatNumber(video.likes)}</span>
@@ -79,10 +75,9 @@ const DiscoverPageNew = () => {
       {filteredUsers.map((user) => (
         <div key={user.id} className="flex items-center justify-between p-4 bg-gray-800/50 rounded-lg">
           <div className="flex items-center gap-3">
-            <img 
-              src={avatarPlaceholder} 
-              alt={user.displayName}
-              className="w-12 h-12 rounded-full"
+            <AvatarPlaceholder 
+              username={user.username}
+              size="md"
             />
             <div>
               <h3 className="text-white font-semibold">{user.displayName}</h3>

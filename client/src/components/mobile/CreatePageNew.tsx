@@ -6,7 +6,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { useMutation } from '@tanstack/react-query';
 import { apiRequest, queryClient, CURRENT_USERNAME } from '@/lib/queryClient';
 import { useToast } from '@/hooks/use-toast';
-import videoPlaceholder from '@/assets/video-placeholder.jpg';
+import VideoThumbnail from '@/components/ui/VideoThumbnail';
 
 interface VideoUpload {
   username: string;
@@ -88,8 +88,8 @@ const CreatePageNew = () => {
       username: CURRENT_USERNAME,
       caption: caption.trim(),
       music: music,
-      thumbnail: videoPlaceholder, // In real app, this would be extracted from video
-      videoUrl: videoPlaceholder, // In real app, this would be the uploaded video URL
+      thumbnail: '/placeholder-video.svg', // In real app, this would be extracted from video
+      videoUrl: '/placeholder-video.svg', // In real app, this would be the uploaded video URL
       isLiked: false,
       isFollowing: false,
     };
@@ -186,10 +186,7 @@ const CreatePageNew = () => {
             loop
           />
         ) : (
-          <div
-            className="w-full h-full bg-cover bg-center"
-            style={{ backgroundImage: `url(${videoPlaceholder})` }}
-          />
+          <VideoThumbnail className="w-full h-full" showPlayButton={false} />
         )}
       </div>
 

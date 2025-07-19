@@ -4,8 +4,8 @@ import { Button } from '@/components/ui/button';
 import { useQuery } from '@tanstack/react-query';
 import { apiRequest, CURRENT_USER_ID } from '@/lib/queryClient';
 import { User, Video } from '../../../../shared/schema';
-import videoPlaceholder from '@/assets/video-placeholder.jpg';
-import avatarPlaceholder from '@/assets/avatar-placeholder.jpg';
+import VideoThumbnail from '@/components/ui/VideoThumbnail';
+import AvatarPlaceholder from '@/components/ui/AvatarPlaceholder';
 
 const ProfilePageNew = () => {
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
@@ -55,12 +55,8 @@ const ProfilePageNew = () => {
   const renderVideoGrid = () => (
     <div className="grid grid-cols-3 gap-1">
       {displayVideos.map((video) => (
-        <div key={video.id} className="relative aspect-[9/16] bg-gray-800 rounded-lg overflow-hidden">
-          <img 
-            src={videoPlaceholder} 
-            alt="Video"
-            className="w-full h-full object-cover"
-          />
+        <div key={video.id} className="relative aspect-[9/16] rounded-lg overflow-hidden">
+          <VideoThumbnail className="w-full h-full" />
           <div className="absolute bottom-2 left-2 flex items-center gap-1">
             <Heart className="w-4 h-4 text-white" />
             <span className="text-white text-xs">{formatNumber(video.likes)}</span>
@@ -78,12 +74,8 @@ const ProfilePageNew = () => {
     <div className="space-y-4">
       {displayVideos.map((video) => (
         <div key={video.id} className="flex gap-3 p-3 bg-gray-800/30 rounded-lg">
-          <div className="w-16 h-20 bg-gray-800 rounded-lg overflow-hidden flex-shrink-0">
-            <img 
-              src={videoPlaceholder} 
-              alt="Video"
-              className="w-full h-full object-cover"
-            />
+          <div className="w-16 h-20 rounded-lg overflow-hidden flex-shrink-0">
+            <VideoThumbnail className="w-full h-full" />
           </div>
           <div className="flex-1">
             <p className="text-white text-sm mb-2 line-clamp-2">{video.caption}</p>
@@ -133,10 +125,10 @@ const ProfilePageNew = () => {
       {/* Profile Info */}
       <div className="px-4 pb-6">
         <div className="flex items-center gap-4 mb-4">
-          <img 
-            src={avatarPlaceholder} 
-            alt={currentUser.displayName}
-            className="w-20 h-20 rounded-full border-2 border-purple-500"
+          <AvatarPlaceholder 
+            username={currentUser.username}
+            size="lg"
+            className="w-20 h-20 border-2 border-purple-500"
           />
           <div className="flex-1">
             <h2 className="text-xl font-bold mb-1">{currentUser.displayName}</h2>

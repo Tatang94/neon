@@ -5,7 +5,7 @@ import { useQuery, useMutation } from '@tanstack/react-query';
 import { apiRequest, queryClient, CURRENT_USER_ID } from '@/lib/queryClient';
 import { Notification } from '../../../../shared/schema';
 import { useToast } from '@/hooks/use-toast';
-import avatarPlaceholder from '@/assets/avatar-placeholder.jpg';
+import AvatarPlaceholder from '@/components/ui/AvatarPlaceholder';
 
 const InboxPageNew = () => {
   const [activeTab, setActiveTab] = useState<'all' | 'likes' | 'comments' | 'followers'>('all');
@@ -108,7 +108,7 @@ const InboxPageNew = () => {
       id: '1',
       type: 'like' as const,
       fromUsername: '@dancequeen',
-      fromAvatar: avatarPlaceholder,
+      fromAvatar: '',
       content: 'liked your video',
       isRead: false,
       createdAt: new Date(Date.now() - 1000 * 60 * 15), // 15 minutes ago
@@ -117,7 +117,7 @@ const InboxPageNew = () => {
       id: '2',
       type: 'comment' as const,
       fromUsername: '@techreviewer',
-      fromAvatar: avatarPlaceholder,
+      fromAvatar: '',
       content: 'commented on your video: "This is amazing! 🔥"',
       isRead: false,
       createdAt: new Date(Date.now() - 1000 * 60 * 60 * 2), // 2 hours ago
@@ -126,7 +126,7 @@ const InboxPageNew = () => {
       id: '3',
       type: 'follow' as const,
       fromUsername: '@newuser123',
-      fromAvatar: avatarPlaceholder,
+      fromAvatar: '',
       content: 'started following you',
       isRead: true,
       createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24), // 1 day ago
@@ -135,7 +135,7 @@ const InboxPageNew = () => {
       id: '4',
       type: 'like' as const,
       fromUsername: '@artist_vibes',
-      fromAvatar: avatarPlaceholder,
+      fromAvatar: '',
       content: 'liked your video',
       isRead: true,
       createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24 * 2), // 2 days ago
@@ -230,10 +230,9 @@ const InboxPageNew = () => {
                 }`}
                 onClick={() => notification.isRead || handleMarkAsRead(notification.id)}
               >
-                <img
-                  src={notification.fromAvatar || avatarPlaceholder}
-                  alt={notification.fromUsername}
-                  className="w-12 h-12 rounded-full"
+                <AvatarPlaceholder 
+                  username={notification.fromUsername}
+                  size="md"
                 />
                 <div className="flex-1">
                   <div className="flex items-center gap-2 mb-1">

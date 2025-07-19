@@ -38,13 +38,13 @@ const MobileApp = () => {
   return (
     <div className="relative w-full h-screen bg-background overflow-hidden">
       {/* Main Content */}
-      <div className="h-full pb-32 overflow-hidden">
+      <div className="h-full pb-20 overflow-hidden">
         {renderContent()}
       </div>
 
       {/* Bottom Navigation */}
-      <nav className="absolute bottom-0 left-0 right-0 bg-background/95 backdrop-blur-sm border-t border-border px-6 py-4 safe-area-inset-bottom">
-        <div className="flex justify-between items-center w-full">
+      <nav className="absolute bottom-0 left-0 right-0 bg-background/95 backdrop-blur-sm border-t border-border">
+        <div className="flex justify-around items-center px-4 py-3">
           {navItems.map((item) => {
             const Icon = item.icon;
             const isActive = activeTab === item.id;
@@ -54,28 +54,28 @@ const MobileApp = () => {
                 key={item.id}
                 onClick={() => setActiveTab(item.id)}
                 className={cn(
-                  'flex flex-col items-center justify-center p-3 rounded-xl transition-all',
+                  'flex flex-col items-center justify-center min-w-[60px] p-2 rounded-lg transition-all',
                   isActive ? 'text-primary' : 'text-muted-foreground hover:text-foreground'
                 )}
               >
                 {item.id === 'create' ? (
-                  <div className="w-14 h-14 rounded-full gradient-primary flex items-center justify-center glow-pink hover:scale-110 transition-transform">
-                    <Icon className="w-7 h-7 text-white" />
+                  <div className="w-12 h-12 rounded-full gradient-primary flex items-center justify-center glow-pink hover:scale-105 transition-transform mb-1">
+                    <Icon className="w-6 h-6 text-white" />
                   </div>
                 ) : (
                   <>
                     <Icon className={cn(
-                      'w-7 h-7 mb-1',
+                      'w-6 h-6 mb-1',
                       isActive ? 'text-primary' : 'text-muted-foreground'
                     )} />
-                    <span className={cn(
-                      'text-sm font-medium',
-                      isActive ? 'text-primary' : 'text-muted-foreground'
-                    )}>
-                      {item.label}
-                    </span>
                   </>
                 )}
+                <span className={cn(
+                  'text-xs font-medium leading-none',
+                  isActive ? 'text-primary' : 'text-muted-foreground'
+                )}>
+                  {item.label}
+                </span>
               </button>
             );
           })}
