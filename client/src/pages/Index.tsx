@@ -1,14 +1,12 @@
 import { useState } from 'react';
-import { useLocation } from 'wouter';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { Smartphone, Monitor } from 'lucide-react';
+import { Smartphone } from 'lucide-react';
 import MobileApp from '@/components/mobile/MobileApp';
 import heroImage from '@/assets/hero-image.jpg';
 
 const Index = () => {
   const [activeView, setActiveView] = useState<'hero' | 'mobile'>('hero');
-  const [, setLocation] = useLocation();
 
   if (activeView === 'mobile') {
     return (
@@ -53,8 +51,8 @@ const Index = () => {
             Create, discover, and share amazing content with our Gen Z-focused mobile app and powerful admin dashboard
           </p>
 
-          {/* Call to Action Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          {/* Call to Action Button */}
+          <div className="flex justify-center">
             <Button
               size="lg"
               onClick={() => setActiveView('mobile')}
@@ -62,16 +60,6 @@ const Index = () => {
             >
               <Smartphone className="w-6 h-6 mr-2" />
               View Mobile App
-            </Button>
-            
-            <Button
-              size="lg"
-              onClick={() => setLocation('/admin')}
-              variant="outline"
-              className="border-white/30 text-white hover:bg-white/10 px-8 py-4 text-lg font-semibold hover:scale-105 transition-bounce backdrop-blur-sm"
-            >
-              <Monitor className="w-6 h-6 mr-2" />
-              Admin Dashboard
             </Button>
           </div>
         </div>
@@ -89,11 +77,11 @@ const Index = () => {
             Platform Features
           </h2>
           
-          <div className="grid md:grid-cols-2 gap-12 items-start">
+          <div className="flex justify-center">
             {/* Mobile Features Card */}
-            <Card className="border-border bg-card/50 backdrop-blur-sm hover:border-primary/30 transition-smooth">
+            <Card className="border-border bg-card/50 backdrop-blur-sm hover:border-primary/30 transition-smooth max-w-2xl">
               <CardContent className="p-8">
-                <div className="flex items-center gap-3 mb-6">
+                <div className="flex items-center gap-3 mb-6 justify-center">
                   <Smartphone className="w-8 h-8 text-primary" />
                   <h3 className="text-2xl font-bold text-foreground">Mobile Experience</h3>
                 </div>
@@ -117,38 +105,6 @@ const Index = () => {
                   <li className="flex items-center gap-3">
                     <div className="w-2 h-2 rounded-full bg-secondary flex-shrink-0" />
                     <span>Creator profiles with detailed analytics</span>
-                  </li>
-                </ul>
-              </CardContent>
-            </Card>
-
-            {/* Admin Features Card */}
-            <Card className="border-border bg-card/50 backdrop-blur-sm hover:border-secondary/30 transition-smooth">
-              <CardContent className="p-8">
-                <div className="flex items-center gap-3 mb-6">
-                  <Monitor className="w-8 h-8 text-secondary" />
-                  <h3 className="text-2xl font-bold text-foreground">Admin Dashboard</h3>
-                </div>
-                <ul className="space-y-4 text-muted-foreground">
-                  <li className="flex items-center gap-3">
-                    <div className="w-2 h-2 rounded-full bg-secondary flex-shrink-0" />
-                    <span>Comprehensive analytics and user insights</span>
-                  </li>
-                  <li className="flex items-center gap-3">
-                    <div className="w-2 h-2 rounded-full bg-accent flex-shrink-0" />
-                    <span>Advanced content moderation tools</span>
-                  </li>
-                  <li className="flex items-center gap-3">
-                    <div className="w-2 h-2 rounded-full bg-primary flex-shrink-0" />
-                    <span>User management and role permissions</span>
-                  </li>
-                  <li className="flex items-center gap-3">
-                    <div className="w-2 h-2 rounded-full bg-secondary flex-shrink-0" />
-                    <span>Music library and content management</span>
-                  </li>
-                  <li className="flex items-center gap-3">
-                    <div className="w-2 h-2 rounded-full bg-accent flex-shrink-0" />
-                    <span>Monetization and creator payout system</span>
                   </li>
                 </ul>
               </CardContent>

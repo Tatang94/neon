@@ -1,51 +1,40 @@
 # ViralVids - Social Media Platform
 
 ## Overview
-ViralVids is a modern short video social platform with neon-themed design, featuring both a mobile app interface and admin dashboard. The project has been successfully migrated from Lovable to Replit with full compatibility.
+A modern short video social platform with neon-themed design, featuring a mobile app interface and admin dashboard. Successfully migrated from Lovable to Replit environment with proper client/server separation and security practices.
 
 ## Project Architecture
-- **Frontend**: React with TypeScript, Vite, Tailwind CSS
-- **Backend**: Express.js with TypeScript
-- **Routing**: Wouter for SPA routing
+- **Frontend**: React with TypeScript, Tailwind CSS with custom neon theme
+- **Backend**: Express.js server with in-memory storage
+- **Routing**: Wouter for SPA routing (Replit compatible)
 - **State Management**: TanStack Query for data fetching
-- **UI Components**: shadcn/ui with custom neon theming
-- **Storage**: In-memory storage (MemStorage) for development
-
-## Recent Changes (Migration)
-### January 19, 2025
-- ✓ Migrated project from Lovable to Replit environment
-- ✓ Fixed routing system from react-router-dom to wouter for Replit compatibility
-- ✓ Resolved CSS configuration issues with Tailwind and custom classes
-- ✓ Fixed import order for CSS files (Google Fonts import moved before Tailwind)
-- ✓ Added proper color definitions for custom surface classes
-- ✓ Improved mobile app container sizing with fixed height (600px)
-- ✓ Updated query client setup for proper API communication
-
-## User Preferences
-- Language: Indonesian (user communicated in Indonesian)
-- Focus: Layout optimization and proper component sizing
-- Design priority: Maintaining neon aesthetic and mobile-first approach
+- **UI Components**: Shadcn/ui components with custom styling
 
 ## Key Features
-### Mobile App
-- Vertical video feed with smooth navigation
-- Bottom navigation with 5 tabs (Home, Discover, Create, Inbox, Profile)
-- Neon-themed UI with glowing effects
-- Responsive mobile container design
+- Mobile app simulation with video feed, discovery, create, inbox, and profile pages
+- Admin dashboard accessible at `/admin` route
+- Neon-themed design with gradients and glow effects
+- Responsive layout with proper sizing constraints
 
-### Admin Dashboard  
-- Comprehensive analytics and user management
-- Content moderation tools
-- Music library management
-- Monetization and payout systems
-- Dark-themed interface with sidebar navigation
+## Recent Changes
+- **2025-01-19**: Successfully migrated from Lovable to Replit
+  - Fixed routing system to use wouter instead of react-router-dom
+  - Resolved Tailwind CSS configuration issues
+  - Updated mobile app sizing to use fixed height (600px) instead of full screen
+  - Removed admin dashboard access from landing page per user request
+  - Admin dashboard now only accessible via direct `/admin` URL
+
+## User Preferences
+- Admin dashboard should be hidden from main landing page
+- Admin access only through `/admin` URL
+- Mobile app view should have proper sizing constraints
+- Clean, organized layout without unnecessary elements
 
 ## Technical Notes
-- Server runs on port 5000 (required for Replit)
-- Uses Vite for development with HMR
-- Custom CSS gradients and glow effects for neon theme
-- Proper client/server separation for security
-- TypeScript throughout for type safety
+- Server runs on port 5000 as required by Replit
+- CSS uses HSL color variables for theming
+- Custom utility classes defined for neon effects and animations
+- Components are properly organized in feature-based directories
 
-## Current Status
-Project successfully migrated and running on Replit. All core functionality preserved with improved compatibility and proper responsive sizing.
+## Migration Status
+✅ All checklist items completed - project ready for development
