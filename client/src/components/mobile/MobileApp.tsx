@@ -36,15 +36,15 @@ const MobileApp = () => {
   };
 
   return (
-    <div className="relative w-full max-w-md mx-auto bg-background overflow-hidden border border-border rounded-2xl shadow-2xl" style={{ height: '700px', minHeight: '700px' }}>
+    <div className="relative w-full h-screen bg-background overflow-hidden">
       {/* Main Content */}
-      <div className="h-full pb-24 overflow-hidden">
+      <div className="h-full pb-32 overflow-hidden">
         {renderContent()}
       </div>
 
       {/* Bottom Navigation */}
-      <nav className="absolute bottom-0 left-0 right-0 bg-background/95 backdrop-blur-sm border-t border-border px-4 py-3">
-        <div className="flex justify-between items-center max-w-sm mx-auto">
+      <nav className="absolute bottom-0 left-0 right-0 bg-background/95 backdrop-blur-sm border-t border-border px-6 py-4 safe-area-inset-bottom">
+        <div className="flex justify-between items-center w-full">
           {navItems.map((item) => {
             const Icon = item.icon;
             const isActive = activeTab === item.id;
@@ -54,22 +54,22 @@ const MobileApp = () => {
                 key={item.id}
                 onClick={() => setActiveTab(item.id)}
                 className={cn(
-                  'flex flex-col items-center justify-center p-2 rounded-xl transition-all',
+                  'flex flex-col items-center justify-center p-3 rounded-xl transition-all',
                   isActive ? 'text-primary' : 'text-muted-foreground hover:text-foreground'
                 )}
               >
                 {item.id === 'create' ? (
-                  <div className="w-12 h-12 rounded-full gradient-primary flex items-center justify-center glow-pink hover:scale-110 transition-transform">
-                    <Icon className="w-6 h-6 text-white" />
+                  <div className="w-14 h-14 rounded-full gradient-primary flex items-center justify-center glow-pink hover:scale-110 transition-transform">
+                    <Icon className="w-7 h-7 text-white" />
                   </div>
                 ) : (
                   <>
                     <Icon className={cn(
-                      'w-6 h-6 mb-1',
+                      'w-7 h-7 mb-1',
                       isActive ? 'text-primary' : 'text-muted-foreground'
                     )} />
                     <span className={cn(
-                      'text-xs font-medium',
+                      'text-sm font-medium',
                       isActive ? 'text-primary' : 'text-muted-foreground'
                     )}>
                       {item.label}

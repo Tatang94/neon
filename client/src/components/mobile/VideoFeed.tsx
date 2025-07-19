@@ -126,7 +126,7 @@ const VideoFeed = () => {
       <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
 
       {/* Video Actions (Right Side) */}
-      <div className="absolute right-4 bottom-32 flex flex-col items-center gap-6">
+      <div className="absolute right-4 bottom-40 flex flex-col items-center gap-6">
         {/* Profile Picture */}
         <div className="relative">
           <img 
@@ -187,7 +187,7 @@ const VideoFeed = () => {
       </div>
 
       {/* Video Info (Bottom Left) */}
-      <div className="absolute bottom-24 left-4 right-20 z-10">
+      <div className="absolute bottom-32 left-4 right-20 z-10">
         <div className="text-white">
           <h3 className="font-bold text-xl mb-3">{video.username}</h3>
           <p className="text-base mb-4 leading-relaxed">{video.caption}</p>

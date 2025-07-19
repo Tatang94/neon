@@ -30,8 +30,9 @@ A modern short video social platform with neon-themed design, featuring a mobile
 ## User Preferences
 - Admin dashboard should be hidden from main landing page
 - Admin access only through `/admin` URL
-- Mobile app view should have proper sizing constraints
+- Mobile app view should use full screen (h-screen) for better mobile experience
 - Clean, organized layout without unnecessary elements
+- Larger touch targets and buttons for better mobile usability
 
 ## Technical Notes
 - Server runs on port 5000 as required by Replit

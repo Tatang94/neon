@@ -10,17 +10,15 @@ const Index = () => {
 
   if (activeView === 'mobile') {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 flex items-center justify-center p-6">
-        <div className="text-center w-full max-w-lg">
-          <Button 
-            onClick={() => setActiveView('hero')}
-            variant="outline"
-            className="mb-8 border-white/20 text-white hover:bg-white/10 px-6 py-2"
-          >
-            ← Back to Home
-          </Button>
-          <MobileApp />
-        </div>
+      <div className="relative w-full h-screen">
+        <Button 
+          onClick={() => setActiveView('hero')}
+          variant="outline"
+          className="absolute top-4 left-4 z-50 border-white/20 text-white hover:bg-white/10 px-4 py-2 bg-black/20 backdrop-blur-sm"
+        >
+          ← Back to Home
+        </Button>
+        <MobileApp />
       </div>
     );
   }
