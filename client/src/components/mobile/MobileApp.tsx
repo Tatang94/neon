@@ -36,9 +36,9 @@ const MobileApp = () => {
   };
 
   return (
-    <div className="relative w-full max-w-sm mx-auto h-screen bg-background overflow-hidden border border-border rounded-lg">
+    <div className="relative w-full max-w-sm mx-auto bg-background overflow-hidden border border-border rounded-lg shadow-2xl" style={{ height: '600px' }}>
       {/* Main Content */}
-      <div className="h-full pb-20">
+      <div className="h-full pb-20 overflow-hidden">
         {renderContent()}
       </div>
 
